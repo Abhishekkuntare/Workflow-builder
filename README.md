@@ -1,138 +1,103 @@
-🧩 Intelligent Workflow Builder
+# 🧠 Intelligent Workflow Builder
 
-A full-stack no-code/low-code web application that lets users visually build and interact with intelligent workflows.
+A full-stack **no-code / low-code** web application that enables users to visually construct and interact with **intelligent workflows**. Using drag-and-drop components, users define a flow that processes input through embeddings, vector search, LLMs, and optional web search, returning results in a chat interface.
 
-Users can drag & drop components (User Query, Knowledge Base, LLM Engine, Output) to define workflows, then chat with the system. The workflow processes queries using embeddings, vector search, LLMs, and optionally web search.
+---
 
-🚀 Tech Stack
+##  Live Demo
 
-Frontend: React.js + React Flow + Tailwind
+Explore the fully functional live version here:
 
-Backend: FastAPI
+> **Live App:** https://workflow-builder-flame.vercel.app/
 
-Database: MongoDB (stores workflow configs, documents metadata, chat logs)
+---
 
-Vector Store: ChromaDB
+## Tech Stack
 
-Embeddings: OpenAI Embeddings, Gemini embeddings
+- **Frontend:** React.js + React Flow + Tailwind CSS  
+- **Backend:** FastAPI (Python)  
+- **Database:** MongoDB (stores documents metadata, workflow definitions, chat logs)  
+- **Vector Store:** ChromaDB  
+- **Embeddings:** OpenAI Embeddings, Gemini Embeddings  
+- **LLMs:** OpenAI GPT, Google Gemini  
+- **Web Search:** SerpAPI or Brave Search  
+- **Text Extraction:** PyMuPDF  
+- **Containerization:** Docker + Docker Compose  
+- **(Optional) Orchestration:** Kubernetes (minikube / GKE / EKS)  
+- **(Optional) Monitoring & Logging:** Prometheus + Grafana, ELK Stack
 
-LLMs: OpenAI GPT, Gemini
+---
 
-Web Search Tool: SerpAPI / Brave API
+## Repo Structure
 
-Text Extraction: PyMuPDF
+workflow-builder/
+├── backend/
+│ ├── app/
+│ │ ├── main.py # FastAPI entrypoint
+│ │ ├── routes/
+│ │ │ ├── documents.py # Upload & document processing
+│ │ │ ├── workflows.py # Save / retrieve workflow definitions
+│ │ │ ├── chat.py # Workflow execution & chat endpoint
+│ │ ├── services/
+│ │ │ ├── embeddings.py # Embedding logic
+│ │ │ ├── chromadb.py # Vector store integration
+│ │ │ ├── llm.py # LLM orchestration
+│ │ ├── db.py # MongoDB connection (e.g., via Motor or PyMongo)
+│ ├── Dockerfile
+│ └── requirements.txt
+├── frontend/
+│ ├── src/
+│ │ ├── components/ # React Flow nodes, builder UI, ChatModal
+│ │ ├── api/ # API utilities (axios)
+│ │ └── App.jsx
+│ ├── Dockerfile
+│ └── package.json
+├── docker-compose.yml
+└── README.md
 
-Containerization: Docker
 
-(Optional) Orchestration: Kubernetes (minikube / GKE / EKS)
+---
 
-📦 Features
+##  Quick Start
 
-Drag & drop workflow builder with React Flow
+### 1. Clone the Repository
 
-Four core components:
-
-User Query Component – entry point for queries
-
-KnowledgeBase Component – upload PDFs, extract text, embed, store in Chroma
-
-LLM Engine Component – generate responses with GPT/Gemini, optional web search
-
-Output Component – chat interface with history
-
-Workflow validation and execution
-
-Chat with the workflow
-
-Document upload and retrieval
-
-Real-time embeddings + context injection into LLM
-
-Extensible design (add new components easily)
-
-🗂️ Project Structure
-intelligent-workflow-builder/
-│── backend/
-│   ├── app/
-│   │   ├── main.py              # FastAPI entrypoint
-│   │   ├── routes/
-│   │   │   ├── documents.py     # Upload / manage docs
-│   │   │   ├── workflows.py     # Save / load workflow definitions
-│   │   │   ├── chat.py          # Run workflow + chat
-│   │   ├── services/
-│   │   │   ├── embeddings.py    # Generate embeddings
-│   │   │   ├── chromadb.py      # ChromaDB vector store
-│   │   │   ├── llm.py           # GPT / Gemini integration
-│   │   └── db.py                # MongoDB connection
-│   ├── Dockerfile
-│   └── requirements.txt
-│
-│── frontend/
-│   ├── src/
-│   │   ├── components/          # React Flow nodes, Chat UI
-│   │   ├── pages/               # Main builder page
-│   │   ├── api/                 # API hooks
-│   │   └── App.js
-│   ├── Dockerfile
-│   └── package.json
-│
-│── docker-compose.yml
-│── README.md
-
-⚙️ Setup Instructions
-1️⃣ Clone the repo
+```bash
 git clone https://github.com/Abhishekkuntare/Workflow-builder
 cd intelligent-workflow-builder
 
-2️⃣ Backend Setup (FastAPI + MongoDB + ChromaDB)
-Create .env inside backend/:
-MONGO_URI=mongodb://localhost:27017
-MONGO_DB=workflow_builder
-OPENAI_API_KEY=your_openai_api_key
 GEMINI_API_KEY=your_gemini_api_key
+OPENAI_API_KEY=your_open_api_key
+NODE_ENV=development
+MONGODB_URI=your_mongodb_api_key
 
-Install dependencies:
+Install Dependencies & Run
+
 cd backend
 pip install -r requirements.txt
-
-Run backend:
 uvicorn app.main:app --reload --port 8000
 
-3️⃣ Frontend Setup (React)
-cd frontend
+3. Frontend Setup
+cd ../frontend
 npm install
 npm run dev
 
+4. (Optional) Docker Compose
 
-Frontend runs at: http://localhost:3000
-
-4️⃣ Docker (Optional)
-
-Run everything with Docker Compose:
-
+Run the entire stack with one command:
 docker-compose up --build
 
+API Endpoints
 
-This spins up:
+POST /documents/upload – Upload and process documents (PDFs → text → embeddings)
 
-FastAPI backend (port 8000)
+POST /workflows – Save workflow definitions
 
-React frontend (port 3000)
+GET /workflows/{id} – Retrieve a saved workflow
 
-MongoDB (port 27017)
+POST /chat – Execute the workflow; returns the answer + execution trace
 
-ChromaDB container
+Live Demo
 
-
-🔍 API Endpoints
-
-POST /documents/upload – Upload and process a PDF
-
-POST /workflow/run – Execute the current workflow
-
-POST /chat/query – Send a query and get a response
-
-GET /workflows – List saved workflows
-
-POST /workflows – Save a workflow definition
-
+Check out the fully deployed application:
+https://workflow-builder-flame.vercel.app/
