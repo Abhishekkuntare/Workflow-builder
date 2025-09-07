@@ -81,7 +81,7 @@ intelligent-workflow-builder/
 
 ⚙️ Setup Instructions
 1️⃣ Clone the repo
-git clone https://github.com/your-username/intelligent-workflow-builder.git
+git clone https://github.com/Abhishekkuntare/Workflow-builder
 cd intelligent-workflow-builder
 
 2️⃣ Backend Setup (FastAPI + MongoDB + ChromaDB)
@@ -123,11 +123,6 @@ MongoDB (port 27017)
 
 ChromaDB container
 
-5️⃣ Kubernetes Deployment (Optional)
-
-For minikube or cloud clusters:
-
-kubectl apply -f k8s/
 
 🔍 API Endpoints
 
@@ -141,22 +136,3 @@ GET /workflows – List saved workflows
 
 POST /workflows – Save a workflow definition
 
-📊 Optional Monitoring
-
-Prometheus + Grafana → metrics & dashboards
-
-ELK Stack → centralized logging
-
-📹 Demo
-
-👉 (Add Loom/YT screen recording here)
-
-🏗️ Future Extensions
-
-User authentication & roles
-
-Multiple LLM providers
-
-Workflow templates & marketplace
-
-Streaming responses
